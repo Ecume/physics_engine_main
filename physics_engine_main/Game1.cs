@@ -1,6 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Flat;
+using Flat.Input;
+using Flat.Graphics;
+using System;
 
 namespace physics_engine_main
 {
@@ -8,12 +12,17 @@ namespace physics_engine_main
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private Screen screen;
+        private Shapes shapes;
+        private Camera camera;
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            const double Updates_Per_Second = 60d;
+            this.TargetElapsedTime = TimeSpan.FromTicks((long)Math.Round((double)TimeSpan.TicksPerSecond / Updates_Per_Second));
         }
 
         protected override void Initialize()
@@ -32,9 +41,7 @@ namespace physics_engine_main
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
+            
             // TODO: Add your update logic here
 
             base.Update(gameTime);
